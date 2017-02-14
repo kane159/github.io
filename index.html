@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="Keywords" content="標準化">
 		<meta name="Description" content="描述">
-		<title>標準化推箱子小遊戲</title>
+		<title>標準化</title>
 		<style>/*css樣式表的衣櫃*/
 		*{
 			margin:0px;
@@ -25,8 +25,7 @@
 			<div id="msg"></div>
 			<input type="button" value="上一關" onClick="NextLevel(-1)">
 			<input type="button" value="下一關" onClick="NextLevel(1)">
-			<input type="button" value="重玩本關" onClick="NextLevel(0)">
-			<input type="button" value="遊戲說明" onClick="showHelp()">
+			<input type="button" value="遊戲說明" onClick="showHelp(1)">
 		</div>
 	
 	<script src="js/mapdata100.js"></script>
@@ -45,7 +44,11 @@
 			"block" : "images/block.gif",
 			"wall" : "images/wall.png",
 			"box" : "images/box.png",
+			"box2" : "images/box2.png",
+			"box3" : "images/box3.png",
 			"ball" : "images/ball.png",
+			"ball2" : "images/ball2.png",
+			"ball3" : "images/ball3.png",
 			"up" : "images/up.png",
 			"down" : "images/down.png",
 			"left" : "images/left.png",
@@ -69,13 +72,17 @@
 				images[src].src = srcs[src];
 			}
 		}
-		var block,wall,box,ball,up,down,left,right;
+		var block,wall,box,ball,box2,ball2,box3,ball3,up,down,left,right;
 		imgPreload(oImgs,function(images){
 			//console.log(images.block);
 			block = images.block;
 			wall = images.wall;
 			box = images.box;
 			ball = images.ball;
+			box2 = images.box2;
+			ball2 = images.ball2;
+			box3 = images.box3;
+			ball3 = images.ball3;
 			up = images.up;
 			down = images.down;
 			left = images.left;
@@ -131,6 +138,18 @@
 						break;
 					case 5://繪製箱子及陷進位置
 						pic = box;
+						break;
+					case 6://繪製箱子2
+						pic = box2;
+						break;
+					case 7://繪製箱子3
+						pic = box3;
+						break;
+					case 8://繪製陷進2
+						pic = ball2;
+						break;
+					case 9://繪製陷進3
+						pic = ball3;
 						break;
 					}
 					//每個圖片不一樣寬 需要在對應地板的中心繪製地圖
