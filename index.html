@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="Keywords" content="標準化">
 		<meta name="Description" content="描述">
-		<title>標準化</title>
+		<title>標準化推箱子小遊戲</title>
 		<style>/*css樣式表的衣櫃*/
 		*{
 			margin:0px;
@@ -151,6 +151,12 @@
 					case 9://繪製陷進3
 						pic = ball3;
 						break;
+					case 10://繪製箱子及陷進位置2
+						pic = box3;
+						break;
+					case 11://繪製箱子及陷進位置3
+						pic = ball2;
+						break;
 					}
 					//每個圖片不一樣寬 需要在對應地板的中心繪製地圖
 					cxt.drawImage(pic,w*j-(pic.width-w)/2,h*i-(pic.height-h),pic.width,pic.height)
@@ -259,6 +265,26 @@
 				curMap[p2.x][p2.y] = 3;//更改地圖對應坐標點的值
 				//console.log(curMap[p2.x][p2.y]);
 			}
+			if (curMap[p1.x][p1.y]==6 || curMap[p1.x][p1.y]==5)
+			{//若果小人前面是箱子2那就還需要判斷箱子前面有沒有障礙物(箱子/牆)
+				if (curMap[p2.x][p2.y]==1 || curMap[p2.x][p2.y]==3)
+				{
+					return false;
+				}
+				//若果判斷不成功小人前面的箱子前進一步
+				curMap[p2.x][p2.y] = 6;//更改地圖對應坐標點的值
+				//console.log(curMap[p2.x][p2.y]);
+			}
+			if (curMap[p1.x][p1.y]==7 || curMap[p1.x][p1.y]==5)
+			{//若果小人前面是箱子那就還需要判斷箱子前面有沒有障礙物(箱子/牆)
+				if (curMap[p2.x][p2.y]==1 || curMap[p2.x][p2.y]==3)
+				{
+					return false;
+				}
+				//若果判斷不成功小人前面的箱子前進一步
+				curMap[p2.x][p2.y] = 7;//更改地圖對應坐標點的值
+				//console.log(curMap[p2.x][p2.y]);
+			}
 			//若果都沒判斷成功小人前進一步
 			curMap[p1.x][p1.y] = 4;//更改地圖對應坐標點的值
 			//若果小人前進了一步，小人原來的位置如何顯示
@@ -268,6 +294,26 @@
 				if (v==5)//可能是5 既有箱子又陷進
 				{
 					v=2;//若果小人本身就在陷進裡面的話移開之後還是顯示陷進
+				}else{
+					v=0;//小人移開之後之前小人的位置改為地板
+				}
+			}
+			var v = curLevel[perPosition.x][perPosition.y];
+			if (v!=8)//若果剛開始小人位置不是陷進的話
+			{
+				if (v==5)//可能是5 既有箱子又陷進
+				{
+					v=8;//若果小人本身就在陷進裡面的話移開之後還是顯示陷進
+				}else{
+					v=0;//小人移開之後之前小人的位置改為地板
+				}
+			}
+			var v = curLevel[perPosition.x][perPosition.y];
+			if (v!=9)//若果剛開始小人位置不是陷進的話
+			{
+				if (v==5)//可能是5 既有箱子又陷進
+				{
+					v=9;//若果小人本身就在陷進裡面的話移開之後還是顯示陷進
 				}else{
 					v=0;//小人移開之後之前小人的位置改為地板
 				}
